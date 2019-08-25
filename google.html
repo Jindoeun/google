@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /* 태그 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            min-height: 100vh;
+        }
+        #wapper{
+            min-width:500px;
+            font-size: 13px;
+            font-family: 'Apple SD Gothic Neo',arial,sans-serif;
+            color: #333;
+        }    
+        a {
+            display: block;
+            font-family: 'Apple SD Gothic Neo',arial,sans-serif;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.9);
+            text-decoration: none;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        button:focus, button:active {
+            outline: none;
+        }
+        img {
+            display: block;
+            boder: 0;
+        }
+        li {
+            list-style: none;
+        }
+        input{
+            border: none;
+        }
+        input:focus, input:active{
+            outline: none;
+        }
+        input:focus::-webkit-input-placeholder {/* WebKit browsers */ color:transparent;}
+        input:focus:-moz-placeholder {/* Mozilla Firefox 4 to 18 */ color:transparent;}
+        input:focus::-moz-placeholder {/* Mozilla Firefox 19+ */ color:transparent;}
+        input:focus:-ms-input-placeholder {/* Internet Explorer 10+ */ color:transparent;}
+
+        /* common */
+        .hide {
+            overflow: hidden;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            line-hight: 0;
+            text-indent: -9999px;
+            visibility: hidden;
+        }
+        .hov_line:hover{
+            text-decoration:underline;
+            opacity:0.8;
+        }
+
+        /* ui */
+        /*--- header ---*/
+        #header .headerInBox{
+            padding: 20px 15px;
+            overflow: hidden;
+        }
+        #header .userMenuList{
+            float: right;
+            overflow: hidden;
+        }
+        #header .userMenuList li{
+            float: left;
+            margin-left: 15px; 
+        }
+        #header #userMail a, #header #imageSearch a{
+            margin: 8.5px 0;
+        }
+        #header #userMenu button{
+            width: 30px;
+            height: 30px;
+            background: url('//ssl.gstatic.com/gb/images/i1_1967ca6a.png') no-repeat -132px -37px / 528px 68px;
+            opacity: 0.6;
+        }
+        #header #userMenu button:hover, #header #userMenu button:active{
+            opacity: 1;
+        }
+        #header #userLog a{
+            padding: 0 12px;
+            font-weight: bold;
+            line-height: 28px;
+            color: #fff;
+            background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+            border: 1px solid #4285f4;
+            border-radius:2px;
+        }
+        #header #userLog a:active{
+            background: #3c79e0;
+        }
+
+        /*--- main ---*/
+        .maininInBox{
+            padding: 86px 0;
+        }
+        #mainLogo{
+            width: 272px;
+            height: 92px;
+            margin:0 auto;
+            background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNzIiIGhlaWdodD0iOTIiPjxwYXRoIGZpbGw9IiNFQTQzMzUiIGQ9Ik0xMTUuNzUgNDcuMThjMCAxMi43Ny05Ljk5IDIyLjE4LTIyLjI1IDIyLjE4cy0yMi4yNS05LjQxLTIyLjI1LTIyLjE4QzcxLjI1IDM0LjMyIDgxLjI0IDI1IDkzLjUgMjVzMjIuMjUgOS4zMiAyMi4yNSAyMi4xOHptLTkuNzQgMGMwLTcuOTgtNS43OS0xMy40NC0xMi41MS0xMy40NFM4MC45OSAzOS4yIDgwLjk5IDQ3LjE4YzAgNy45IDUuNzkgMTMuNDQgMTIuNTEgMTMuNDRzMTIuNTEtNS41NSAxMi41MS0xMy40NHoiLz48cGF0aCBmaWxsPSIjRkJCQzA1IiBkPSJNMTYzLjc1IDQ3LjE4YzAgMTIuNzctOS45OSAyMi4xOC0yMi4yNSAyMi4xOHMtMjIuMjUtOS40MS0yMi4yNS0yMi4xOGMwLTEyLjg1IDkuOTktMjIuMTggMjIuMjUtMjIuMThzMjIuMjUgOS4zMiAyMi4yNSAyMi4xOHptLTkuNzQgMGMwLTcuOTgtNS43OS0xMy40NC0xMi41MS0xMy40NHMtMTIuNTEgNS40Ni0xMi41MSAxMy40NGMwIDcuOSA1Ljc5IDEzLjQ0IDEyLjUxIDEzLjQ0czEyLjUxLTUuNTUgMTIuNTEtMTMuNDR6Ii8+PHBhdGggZmlsbD0iIzQyODVGNCIgZD0iTTIwOS43NSAyNi4zNHYzOS44MmMwIDE2LjM4LTkuNjYgMjMuMDctMjEuMDggMjMuMDctMTAuNzUgMC0xNy4yMi03LjE5LTE5LjY2LTEzLjA3bDguNDgtMy41M2MxLjUxIDMuNjEgNS4yMSA3Ljg3IDExLjE3IDcuODcgNy4zMSAwIDExLjg0LTQuNTEgMTEuODQtMTN2LTMuMTloLS4zNGMtMi4xOCAyLjY5LTYuMzggNS4wNC0xMS42OCA1LjA0LTExLjA5IDAtMjEuMjUtOS42Ni0yMS4yNS0yMi4wOSAwLTEyLjUyIDEwLjE2LTIyLjI2IDIxLjI1LTIyLjI2IDUuMjkgMCA5LjQ5IDIuMzUgMTEuNjggNC45NmguMzR2LTMuNjFoOS4yNXptLTguNTYgMjAuOTJjMC03LjgxLTUuMjEtMTMuNTItMTEuODQtMTMuNTItNi43MiAwLTEyLjM1IDUuNzEtMTIuMzUgMTMuNTIgMCA3LjczIDUuNjMgMTMuMzYgMTIuMzUgMTMuMzYgNi42MyAwIDExLjg0LTUuNjMgMTEuODQtMTMuMzZ6Ii8+PHBhdGggZmlsbD0iIzM0QTg1MyIgZD0iTTIyNSAzdjY1aC05LjVWM2g5LjV6Ii8+PHBhdGggZmlsbD0iI0VBNDMzNSIgZD0iTTI2Mi4wMiA1NC40OGw3LjU2IDUuMDRjLTIuNDQgMy42MS04LjMyIDkuODMtMTguNDggOS44My0xMi42IDAtMjIuMDEtOS43NC0yMi4wMS0yMi4xOCAwLTEzLjE5IDkuNDktMjIuMTggMjAuOTItMjIuMTggMTEuNTEgMCAxNy4xNCA5LjE2IDE4Ljk4IDE0LjExbDEuMDEgMi41Mi0yOS42NSAxMi4yOGMyLjI3IDQuNDUgNS44IDYuNzIgMTAuNzUgNi43MiA0Ljk2IDAgOC40LTIuNDQgMTAuOTItNi4xNHptLTIzLjI3LTcuOThsMTkuODItOC4yM2MtMS4wOS0yLjc3LTQuMzctNC43LTguMjMtNC43LTQuOTUgMC0xMS44NCA0LjM3LTExLjU5IDEyLjkzeiIvPjxwYXRoIGZpbGw9IiM0Mjg1RjQiIGQ9Ik0zNS4yOSA0MS40MVYzMkg2N2MuMzEgMS42NC40NyAzLjU4LjQ3IDUuNjggMCA3LjA2LTEuOTMgMTUuNzktOC4xNSAyMi4wMS02LjA1IDYuMy0xMy43OCA5LjY2LTI0LjAyIDkuNjZDMTYuMzIgNjkuMzUuMzYgNTMuODkuMzYgMzQuOTEuMzYgMTUuOTMgMTYuMzIuNDcgMzUuMy40N2MxMC41IDAgMTcuOTggNC4xMiAyMy42IDkuNDlsLTYuNjQgNi42NGMtNC4wMy0zLjc4LTkuNDktNi43Mi0xNi45Ny02LjcyLTEzLjg2IDAtMjQuNyAxMS4xNy0yNC43IDI1LjAzIDAgMTMuODYgMTAuODQgMjUuMDMgMjQuNyAyNS4wMyA4Ljk5IDAgMTQuMTEtMy42MSAxNy4zOS02Ljg5IDIuNjYtMi42NiA0LjQxLTYuNDYgNS4xLTExLjY1bC0yMi40OS4wMXoiLz48L3N2Zz4=);
+        }
+        #mainSearch{
+            max-width: 584px;
+            height: 44px;
+            margin: 30px auto 0;
+            padding: 10px 16px;
+            border-radius: 22px;
+            background-color: #fff;
+            box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+            cursor: text;
+        }
+        .searchIcon{
+            float: left;
+            width: 24px;
+            height: 24px;
+            background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzVGNjM2OCI+PHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0E2LjQ3MSA2LjQ3MSAwIDAgMCAxNiA5LjUgNi41IDYuNSAwIDEgMCA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==);
+        }
+        #searchInput{
+            display: block;
+            float: left;
+            width: 504px;
+            padding: 0 10px;
+            font-family: 'Segoe UI', 'Roboto', arial, sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .micSearch{
+            display: block;
+            float: left;
+            width: 24px;
+            height: 24px;
+            background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPjxwYXRoIGZpbGw9IiM0Mjg1RjQiIGQ9Ik0xMiAxNWMxLjY2IDAgMi45OS0xLjM0IDIuOTktM0wxNSA1YzAtMS42Ni0xLjM0LTMtMy0zUzkgMy4zNCA5IDV2N2MwIDEuNjYgMS4zNCAzIDMgM3oiLz48cGF0aCBmaWxsPSIjMzRBODUzIiBkPSJNMTEgMTguOTJoMlYyMmgtMnoiLz48cGF0aCBmaWxsPSIjRjRCNDAwIiBkPSJNNyAxMkg1YzAgMS45My43OCAzLjY4IDIuMDUgNC45NWwxLjQxLTEuNDFDNy41NiAxNC42MyA3IDEzLjM4IDcgMTJ6Ii8+PHBhdGggZmlsbD0iI0VBNDMzNSIgZD0iTTEyIDE3Yy0xLjM4IDAtMi42My0uNTYtMy41NC0xLjQ3bC0xLjQxIDEuNDFBNi45OSA2Ljk5IDAgMCAwIDEyLjAxIDE5YzMuODcgMCA2Ljk4LTMuMTQgNi45OC03aC0yYzAgMi43Ni0yLjIzIDUtNC45OSA1eiIvPjwvc3ZnPg==) no-repeat center;
+        }
+    </style>
+</head>
+    <body>
+        <div id="wapper">
+            <header id="header">
+<!--                camel(낙타) case-->
+                <div class="headerInBox">
+                    <nav>
+                        <ul class="userMenuList">
+                            <li id="userMail">
+<!--                                snake case-->
+                                <a href="https://mail.google.com/mail/?tab=rm&ogbl" class="userMenu hov_line"><span>Gmail</span></a>
+                            </li>
+<!--                            kebab case: 'image-search' -->
+                            <li id="imageSearch"><a href="https://www.google.co.kr/imghp?hl=ko&amp;tab=ri&amp;ogbl" class="userMenu hov_line"><span>이미지</span></a></li>
+                            <li id="userMenu"><button class="userMenu" title="사용자 메뉴"></button></li>
+                            <li id="userLog"><a href="#" class="userMenu"><span>로그인</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <main class="contents">
+               <div class="maininInBox">
+                    <h1 id="mainLogo" class="logo" alt="Google Logo" title="Google"></h1>
+                   <div id="mainSearch" class="search">
+                        <div class="searchIcon"></div>
+                        <input id="searchInput" type="text" placeholder="Google 검색 또는 URL 입력">
+                        <button href="#" class="micSearch" title="음성 검색"></button>
+                    </div>
+               </div>
+            </main>
+        </div>
+    </body>
+</html>
